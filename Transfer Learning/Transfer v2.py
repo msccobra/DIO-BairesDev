@@ -67,8 +67,8 @@ split_into_dirs(dogs_dir, dst_root, test_size=0.2, val_size=0.2)
 img_size    = (299, 299)
 batch_size  = 256
 num_classes = 2
-epochs_head = 10
-epochs_finetune = 10
+epochs_head = 1
+epochs_finetune = 1
 
 # Data augmentation só no treino
 train_datagen = ImageDataGenerator(
