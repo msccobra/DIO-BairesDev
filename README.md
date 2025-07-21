@@ -1,1 +1,1 @@
-# DIO-BairesDev
+Esse repositório contám todos os projetos desenvolvidos ao longo do curso **BairesDev - Machine Learning Training**. Cada projeto está alocado na pasta corerspondente ao seu nome, onde haverá o programa desenvolvido e uma descrição do mesmo no arquivo README.md.
