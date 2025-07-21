@@ -32,10 +32,41 @@ Bibliotecas necessárias:
    - Usará a rede de treinamento Inceptionv3
    - Gerará uma saída como a seguinte:
 
-Epoch 1/10
+82/82 ━━━━━━━━━━━━━━━━━━━━ 709s 9s/step - accuracy: 0.8644 - loss: 0.3662 - val_accuracy: 0.9908 - val_loss: 0.0265 - learning_rate: 0.0010
+Restoring model weights from the end of the best epoch: 1.
+
+82/82 ━━━━━━━━━━━━━━━━━━━━ 680s 8s/step - accuracy: 0.9823 - loss: 0.0495 - val_accuracy: 0.9937 - val_loss: 0.0188 - learning_rate: 1.0000e-05
+Restoring model weights from the end of the best epoch: 1.
+
+===== Avaliação no conjunto de teste =====
+20/20 ━━━━━━━━━━━━━━━━━━━━ 97s 5s/step - accuracy: 0.9918 - loss: 0.0206 
+Test loss:     0.0196
+Test accuracy: 0.9930
+20/20 ━━━━━━━━━━━━━━━━━━━━ 99s 5s/step 
+
+Classification Report:
+              precision    recall  f1-score   support
+
+         Cat       0.99      0.99      0.99      2500
+         Dog       0.99      0.99      0.99      2500
+
+    accuracy                           0.99      5000
+   macro avg       0.99      0.99      0.99      5000
+weighted avg       0.99      0.99      0.99      5000
 
 
-69/69 ━━━━━━━━━━━━━━━━━━━━ 579s 8s/step - accuracy: 0.9090 - loss: 0.1889 - val_accuracy: 0.9924 - val_loss: 0.0237 - learning_rate: 0.0010
+Confusion Matrix:
+
+[[2479   21]
+
+ [  14 2486]]
+
+ O que significa:
+
+|                | Predição: Negativo | Predição: Positivo |
+|----------------|-------------------|-------------------|
+| **Real: Negativo** | 2479              | 21                |
+| **Real: Positivo** | 14                | 2486              |
 
 ---
 
