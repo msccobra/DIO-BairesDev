@@ -1,4 +1,4 @@
-# Classificador de Gatos e Cães com InceptionV3 (Transferv2)
+# Classificador de Gatos e Cães com InceptionV3 (Transfer v2)
 
 Este projeto treina um modelo baseado em InceptionV3 para fazer a diferenciação entre imagens de diferentes classes, utilizando técnicas de data augmentation e fine-tuning. O dataset utilizado consiste em um banco de dados de aproximadamente 24000 imagens de cães e gatos, e pode ser baixado diretamente do [link](https://download.microsoft.com/download/3/e/1/3e1c3f21-ecdb-4869-8368-6deba77b919f/kagglecatsanddogs_5340.zip).
 
