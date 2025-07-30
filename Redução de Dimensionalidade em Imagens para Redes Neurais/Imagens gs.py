@@ -2,16 +2,22 @@ from PIL import Image
 from pathlib import Path
 import os
 
-# Caminhos
+# Foi usada a biblioteca PIL apenas para abrir e salvar imagens, não foram usados os comandos da mesma
+# Foi feito o código para a conversão de uma imagem em cores para uma imagem em escala de cinza
+
+# Caminhos (Substitua para o seu caso)
 entrada = r'C:\Users\flawl\OneDrive\Imagens\Crie um quadro surre.png'
 saida_ppm = r'C:\Temp\Crie um quadro surre.ppm'
 saida_grayscale = r'C:\Temp\Crie um quadro surre_grayscale.ppm'
 saida_png = r'C:\Temp\Crie um quadro surre_grayscale.png'
 
-# Criar diretório C:\Temp se não existir
+# Criar diretório C:\Temp se não existir (usado para debug, deixei no código final)
 Path(r'C:\Temp').mkdir(exist_ok=True)
 
 # Etapa 1: Verificar e converter PNG para PPM (gera P6)
+# Essa primeira etapa é necessária para a conversão de uma imagem sem uso da biblioteca PIL (embora ela esteja sendo usada para abrir e salvar imagens)
+# Os arquivos PPM são uma maneira de armazenar imagens em formato de texto ou binário
+# O formato P6 é binário, enquanto P3 é texto
 try:
     imagem = Image.open(entrada)
     width, height = imagem.size
@@ -103,10 +109,7 @@ ppm_to_grayscale(saida_ppm, saida_grayscale)
 try:
     with open(saida_grayscale, 'r') as f:
         ppm_lines = f.readlines()
-        #print(f"Primeiras linhas do PPM em escala de cinza:")
-        #print(''.join(ppm_lines[:5]))
         data_lines = [line for line in ppm_lines[3:] if line.strip() and not line.startswith('#')]
-        #print(f"Total de linhas de dados no PPM P3: {len(data_lines)}")
     imagem_grayscale = Image.open(saida_grayscale)
     imagem_grayscale.save(saida_png, format='PNG')
     print(f"Arquivo PNG em escala de cinza salvo em: {saida_png}")
@@ -117,4 +120,3 @@ except Exception as e:
     print(f"Erro ao converter PPM para PNG: {e}")
     exit()
 
-# Alternativa: Converter diretamente para escala de cinza com PIL (opcional)
