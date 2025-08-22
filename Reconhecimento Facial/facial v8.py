@@ -8,16 +8,13 @@ import pandas as pd
 from ultralytics import YOLO
 import tensorflow as tf
 
-# ==========================
-# CONFIGURAÇÕES
-# ==========================
-# Datasets
-LFW_DIR = r"F:\Documentos\lfw-deepfunneled\lfw-deepfunneled"
-IMG_DIR = r"F:\Documentos\celeba\Img\img_align_celeba\img_align_celeba"
+# Diretórios dos datasets
+LFW_DIR = r"F:\Documentos\lfw-deepfunneled\lfw-deepfunneled" # O dataset LFW (Labelled Faces in the Wild) contém fotos de celebridades com identificação nominal (uma por celebridade)
+IMG_DIR = r"F:\Documentos\celeba\Img\img_align_celeba\img_align_celeba" # O dataset CelebA contém fotos de celebridades com identificações em forma numérica
 ID_FILE = r"F:\Documentos\celeba\Anno\identity_CelebA.txt"
 TEST_SUBSET_DIR = r"F:\Documentos\celeba\test_subset"
 
-# Modelos
+# Modelos usados
 YOLO_FACE_WEIGHTS = r"F:\Downloads\yolov8s-face-lindevs.pt"
 FACE_EMBEDDING_MODEL = r"F:\Downloads\arcfaceresnet100-8.onnx"
 
@@ -26,13 +23,12 @@ EMBED_INPUT_SIZE = (112, 112)   # ArcFace
 USE_COSINE = True               # cosine similarity
 THRESHOLD = 0.35                # ajuste conforme validação
 
-# Visualização
+# Visualização, os resultados serão salvos em CSV e imagens.
 SAVE_VIS = True
 VIS_DIR = r"F:\Documentos\outputs_vis"
 
-# ==========================
+
 # Detector YOLOv8 (faces)
-# ==========================
 class YOLOFaceDetector:
     def __init__(self, weights_path, conf=0.5):
         self.model = YOLO(weights_path)
@@ -58,9 +54,7 @@ class YOLOFaceDetector:
         box, _ = self.detect_one_with_conf(img_bgr)
         return box
 
-# ==========================
-# Loaders de embedder (TF/ONNX)
-# ==========================
+# Funções de carregamento de modelos
 def load_tf_embedder(model_path):
     if os.path.isdir(model_path):
         model = tf.saved_model.load(model_path)
@@ -106,9 +100,7 @@ def load_embedder(model_path):
         return tf_fn(batch_bhwc).numpy()
     return wrapper
 
-# ==========================
-# Utils de pré-processo e visualização
-# ==========================
+# Utils de pré-processamento e visualização das imagens
 def preprocess_face_for_embedder(face_bgr, target_size=(112, 112)):
     face_rgb = cv2.cvtColor(face_bgr, cv2.COLOR_BGR2RGB)
     face_rgb = cv2.resize(face_rgb, target_size, interpolation=cv2.INTER_LINEAR)
@@ -150,9 +142,7 @@ def save_annotated(img_bgr, box, out_path, label=None, color=(0,255,0), thicknes
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     cv2.imwrite(out_path, vis)
 
-# ==========================
-# SUBSETS
-# ==========================
+# Criação de subconjuntos de teste para CelebA e LFW
 def create_test_subset_celeba(num_identities=100, min_images_per_identity=5, copy_images=True):
     id_df = pd.read_csv(ID_FILE, delim_whitespace=True, header=None, names=["image_id", "identity"])
     grouped = id_df.groupby("identity")["image_id"].apply(list)
@@ -192,9 +182,7 @@ def create_test_subset_lfw(num_identities=100, min_images_per_identity=5):
     selected = random.sample(valid_people, min(num_identities, len(valid_people)))
     return selected
 
-# ==========================
 # TESTE (YOLOv8 + Embeddings TF/ONNX) com visualização
-# ==========================
 def test_face_recognition_tf_yolo(dataset_dir, detector, embedder_fn,
                                   num_identities=100, max_images_per_person=5,
                                   is_lfw=False, selected_people=None,
@@ -305,9 +293,7 @@ def test_face_recognition_tf_yolo(dataset_dir, detector, embedder_fn,
         print(f"[DONE] Visualizações salvas em: {vis_dir}")
         print(f"[DONE] Log CSV salvo em: {csv_path}")
 
-# ==========================
-# MAIN
-# ==========================
+# Main
 def main():
     print("=== PIPELINE DE RECONHECIMENTO (YOLOv8 + Embeddings TF/ONNX) ===\n")
 
