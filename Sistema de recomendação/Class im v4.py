@@ -113,7 +113,7 @@ train_gen = datagen_train.flow_from_dataframe(
     class_mode='categorical',
     subset='training',
     shuffle=True,
-    classes=classes,   # garante o mesmo mapeamento de classes
+    classes=classes, 
     seed=seed
 )
 
@@ -160,8 +160,7 @@ else:
     )
     for layer in inception.layers:
         layer.trainable = False
-    #emulsiona a nova cabeça e começa o treino…
-
+  
 
 # Carrega InceptionV3 pré-treinado sem o topo
 inception = InceptionV3(
@@ -270,7 +269,7 @@ print(f"Classes: {num_classes}")
 print(f"Amostras treino/validação/teste: {train_gen.samples}/{val_gen.samples}/{test_gen.samples}")
 print(f"Acurácia final: {max(history_finetune.history['val_accuracy']):.4f}")
 
-# Função para fazer predições (exemplo de uso)
+# Função para fazer predições
 def predict_image(image_path, model, class_indices):
     """
     Faz predição em uma única imagem
@@ -290,10 +289,6 @@ def predict_image(image_path, model, class_indices):
     predicted_class = idx_to_class[predicted_class_idx]
     
     return predicted_class, confidence
-
-# Exemplo de como usar a função de predição:
-#predicted_class, confidence = predict_image(r'F:\Downloads\Extract\fashion_small\resized_images', model, train_gen.class_indices)
-#print(f"Classe predita: {predicted_class}, Confiança: {confidence:.4f}")
 
 print(f"\nClasses disponíveis: {train_gen.class_indices}")
 
@@ -351,7 +346,9 @@ def show_recommendations(query_idx, similar_idxs, filenames, labels, idx_to_clas
     plt.tight_layout()
     plt.show()
 
-# Para cada imagem selecionada, recomenda 4 mais similares e exibe
+# Para cada imagem selecionada, recomenda 4 mais similares e as exibe
+# Será aberta uma janela com as 5 imagens, a primeira, selecionada aleatoriamente e as 4 similares
+# Para que a próxima janela seja aberta, a que está na tela deve ser fechada, essa é uma limitação do matplotlib, a biblioteca plotly seria capaz de fazê-lo simultaneamente.
 for idx in selected_indices:
     query_emb = embeddings[idx].reshape(1, -1)
     dists = cosine_distances(query_emb, embeddings)[0]
@@ -359,4 +356,5 @@ for idx in selected_indices:
     print(f"\nRecomendações para imagem '{filenames[idx]}' da classe '{idx_to_class[labels[idx]]}':")
     for sim_idx in similar_idxs:
         print(f"  {filenames[sim_idx]} (classe: {idx_to_class[labels[sim_idx]]}, distância: {dists[sim_idx]:.3f})")
+
     show_recommendations(idx, similar_idxs, filenames, labels, idx_to_class, images_dir)
