@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+# Optional for local backend (better with torch installed)
+transformers
+torch
+openai
+fastapi
+uvicorn
