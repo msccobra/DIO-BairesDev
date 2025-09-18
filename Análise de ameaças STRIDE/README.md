@@ -1,4 +1,18 @@
-# STRIDE Demo (local-ready)
+# Criação de uma aplicação para análise de riscos de segurança
+
+O desafio da vez foi a criação de uma aplicação em Python que fizesse a análise de riscos de segurança, segundo as diretrizes STRIDE, com base em uma imagem de entrada. Como base para o projeto tomei o exemplo presente no repositório [Github STRIDE-demo da DIO](https://github.com/digitalinnovationone/stride-demo). O objetivo desa tarefa era, nominalmente:
+
+Implementar, documentar e compartilhar um projeto que utilize Python, FastAPI e Azure OpenAI para criar uma API capaz de:
+
+- Receber como entrada uma imagem contendo o desenho de arquitetura de uma aplicação;
+- Processar essa imagem utilizando técnicas de prompt engineering;
+- Gerar automaticamente uma análise de ameaças baseada na metodologia STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)
+
+Mas como a vida dá muitas voltas e não tenho mais uma assinatura Azure com créditos de demonstração para obter uma chave API de algum modelo sofisticado, decidi tentar uma alternativa grátis, como a API da Huggingface e também colocar o programa para rodar localmente, através do módulo transformer. O processo em si foi bastante trabalhoso e precisei de uma ajuda ativa bastante significativa do CoPilot, tanto para adicionar linhas de código que fizessem o programa rodar localmente, assim como para debugging, que foi extremamente extensivo. Dessa maneira, se o usuário tiver uma chave Azure, ele pode usá-la, assim como um token Huggingface, ou, se tiver instalada a biblioteca transformer, pode rodar localmente o programa. Nesse último caso, foi baixado localmente o modelo GPT-2, que é antigo, mas serve como a prova de conceito que eu desejava. Dessa maneira, creio que essa nova funcionalidade adiciona muito ao programa.
+
+Abaixo está a documentação completa do programa, gerada pelo próprio CoPilot e revisada, corrigida e expandida por mim.
+
+## STRIDE Demo (local-ready)
 
 Este repositório contém um backend em FastAPI para gerar modelos de ameaças STRIDE a partir de
 uma descrição e uma imagem de arquitetura. O front-end está em `module-1/02-front-end/index.html`.
@@ -46,7 +60,7 @@ cd module-1/01-introducao-backend
 python -m uvicorn main:app --host 127.0.0.1 --port 8001
 ```
 
-3. Abra a URL `http://127.0.0.1:8001/` no navegador para acessar o front-end. Envie uma imagem PNG/JPG e preencha os campos.
+3. Abra a URL `http://127.0.0.1:8001/` no navegador para acessar o front-end. Envie uma imagem PNG e preencha os campos. **Caso deseje subir uma imagem jpg/jpeg, ou qualquer outro formato, isso deve ser modificado no programa.**
 
 Testes locais
 -------------
@@ -60,118 +74,7 @@ Suporte e melhorias
 
 ---
 Arquivo principal do backend: `module-1/01-introducao-backend/main.py`
-<!--START_SECTION:header-->
-<div align="center">
-  <p align="center">
-    <img 
-      alt="DIO Education" 
-      src="./.github/assets/logo.webp" 
-      width="100px" 
-    />
-    <h1>Formação: Agents de IA</h1>
-  </p>
-</div>
-<!--END_SECTION:header-->
 
-<p align="center">
-  <img src="https://img.shields.io/static/v1?label=DIO&message=Education&color=E94D5F&labelColor=202024" alt="DIO Project" />
-  <a href="LICENSE"><img  src="https://img.shields.io/static/v1?label=License&message=MIT&color=E94D5F&labelColor=202024" alt="License"></a>
-</p>
-
-<!--  -->
-<table align="center">
-<thead>
-  <tr>
-    <td>
-        <p align="center">Expert</p>
-        <a href="https://github.com/hsouzaeduardo">
-        <img src="https://avatars.githubusercontent.com/u/1692867?s=400&u=b408cc35aea6b0b2cd69ba3745dbd134edd7ac8a&v=4" alt="@hsouzaeduardo"><br>
-        <sub>@hsouzaeduardo</sub>
-      </a>
-    </td>
-    <td colspan="3">
-    <p>Especialista em Soluções distribuídas e Cloud, pós-graduado em Engenharia de Software, MBA em Arquitetura de Soluções e Dados &IA. Atuando há 25 anos com softwares para web, Mobile, Cloud, IoT, IIoT, e softwares embarcados. Atualmente atuando como Gerente de Arquitetura e inteligência Artificial . Instrutor Oficial Microsoft há mais de 10 anos, Microsoft MVP e apaixonado por tecnologia, inovação e defensor de que um bom feedback constrói gigantes e que todos merecem oportunidades e criador da fórmula:
-
-R = (T + D + TD)²
-
-Resultado = (Tempo + dedicação + Trabalho Duro)</p>
-      <a 
-      href="https://www.linkedin.com/in/felipe-me/" 
-      align="center">
-           <img 
-            align="center" 
-            alt="Material de Apoio" 
-            src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
-            >
-        </a>
-    </td>
-  </tr>
-</thead>
-</table>
-<!--  -->
-
-<div align="center">
-  <h2>💻 Módulos</h2>
-</div>
-
-<div align="center">
-<table>
-  <thead>
-    <tr align="left">
-      <th>#</th>
-      <th>Módulo</th>
-      <th>Materiais</th>
-    </tr>
-  </thead>
-  <tbody align="left">
-    <tr>
-      <td>01</td>
-      <td>📁 Backend</td>
-      <td align="center">
-        <a href="https://learn.microsoft.com/pt-br/azure/security/develop/threat-modeling-tool-threats">
-           <img 
-              align="center" 
-              alt="Material de Apoio" 
-              src="https://img.shields.io/badge/Ver%20Material-E94D5F?style=for-the-badge"
-            >
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>02</td>
-      <td>📁 Frontend</td>
-      <td align="center">
-        <a href="https://js.cytoscape.org/">
-           <img 
-            align="center" 
-            alt="Material de Apoio" 
-            src="https://img.shields.io/badge/Ver%20Material-E94D5F?style=for-the-badge"
-            >
-        </a>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot></tfoot>
-</table>
-</div>
-
-<!--START_SECTION:footer-->
-<br/>
-<br/>
-<p align="center">
-  ⌨️ Feito com 💜 by DIO
-</p>
-
-<br />
-<br />
-
-<p align="center">
-  <a href="https://www.dio.me/" target="_blank">
-    <img align="center" src="./.github/assets/footer.png" alt="banner"/>
-  </a>
-</p>
-
-<!--END_SECTION:footer-->
 # STRIDE Threat Model Analyzer
 
 Este projeto é uma solução completa para análise de ameaças baseada na metodologia STRIDE, composta por um backend em FastAPI (Python) e um front-end em HTML/CSS/JS com visualização de ameaças usando Cytoscape.js.
@@ -218,10 +121,13 @@ Este projeto é uma solução completa para análise de ameaças baseada na meto
    ```
 4. Crie um arquivo `.env` com as seguintes variáveis (preencha com seus dados do Azure OpenAI):
    ```env
-   AZURE_OPENAI_API_KEY=xxxxxx
+   AZURE_OPENAI_API_KEY=xxxxxx # nesse caso, o usuário pode escolher múltiplos modelos que estão na vanguarda da tecnologia, como o o1, o3, GPT 4o, GPT 5 etc... 
    AZURE_OPENAI_ENDPOINT=https://<seu-endpoint>.openai.azure.com/
    AZURE_OPENAI_API_VERSION=2023-05-15
    AZURE_OPENAI_DEPLOYMENT_NAME=<nome-do-deployment>
+   HUGGINGFACE_API_TOKEN=<seu token Hugginface>
+   HUGGINGFACE_MODEL=distilgpt2 #uma versão grátis dessa API roda no GPT2
+   BACKEND=local #rodando localmente, também no GPT2
    ```
 5. Execute o backend:
    ```bash
@@ -242,11 +148,11 @@ Este projeto é uma solução completa para análise de ameaças baseada na meto
      # ou
      python -m http.server 8080
      ```
-3. O front-end espera que o backend esteja rodando em http://localhost:8001
+3. O front-end espera que o backend esteja rodando em http://localhost:8001, via univorn, como descrito acima.
 
 ---
 
-## Cuidados e dicas
+### Cuidados e dicas
 - **Azure OpenAI:** Certifique-se de que seu deployment está ativo e as variáveis do `.env` estão corretas.
 - **CORS:** O backend já está configurado para aceitar requisições de qualquer origem, mas se for usar em produção, ajuste as origens permitidas.
 - **Limite de tokens:** O modelo do Azure OpenAI pode ter limites de tokens. Ajuste `max_tokens` se necessário.
@@ -272,5 +178,3 @@ stride-demo/
 
 ---
 
-## Dúvidas?
-Só chamar que podemos ajudar ! 
