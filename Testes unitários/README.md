@@ -2,7 +2,7 @@
 
 Este programa gera automaticamente testes unitários para arquivos Python usando inteligência artificial em um modelo rodando localmente, ao invés de usar diretamente uma solução na nuvem como Azure Open AI, que seria o ideal, mas é uma solução dependente de uma assinatura ativa na plataforma. Como a minha demonstração já expirou, eu optei por fazer uma alternativa grátis, que roda tudo localmente. O modelo escolhido foi o Gemma-2-2b, desenvolvido pelo Google.
 
-Esse modelo permite o programa rodar localmente sem um custo exacerbado de hardware, e no programa foi feita a divisão de tarefas entre a CPU e a GPU, permitindo que o modelo rode em máquinas com, menos de 16GB de RAM, usando ou não aceleração via GPU. Nesse último caso, como a carga na RAM é menor, é possível usar o computador normamente para tarefas leves paralelamente ao uso do programa.
+Esse modelo permite o programa rodar localmente sem um custo exacerbado de hardware, e no programa foi feita a divisão de tarefas entre a CPU e a GPU, permitindo que o modelo rode em máquinas com, menos de 16GB de RAM, usando ou não aceleração via GPU. Nesse último caso, como a carga na RAM é menor, é possível usar o computador normalmente para tarefas leves paralelamente ao uso do programa.
 
 ## Como funciona?
 - Você fornece um arquivo Python como entrada.
